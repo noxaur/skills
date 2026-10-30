@@ -2,6 +2,7 @@
 """readcheck: measurable checks for casual, readable prose (blog style).
 
 Usage: python3 readcheck.py FILE [FILE ...]   (plain text or markdown)
+       python3 readcheck.py --quick FILE|-      (stock phrases + revision questions only)
 
 Each check has a target band taken from plain-language guidance
 (Cutts / Plain English Campaign, Australian Style Manual, Hemingway-style
@@ -111,6 +112,38 @@ TARGETS = [
 ]
 
 
+STOCK_PHRASES = [
+    (r"\bgets? (?:its|their) own\b", '"gets its own": say what the thing is and where it lives'),
+    (r"\b(?:lives?|sits?|runs?|works?) in (?:its|their) own\b", '"lives in its own": say what the thing is and where it lives'),
+    (r"\byou stop\b", 'pitch: "you stop ...". Explain the mechanism instead'),
+    (r"\bonce\b[^.]*\bevery time\b", 'pitch: "once ... every time". Explain the mechanism instead'),
+    (r"\bwith no \w+ and no\b", 'pitch: "with no X and no Y"'),
+    (r"\band never\b", 'pitch: "and never Z"'),
+]
+
+QUESTIONS = """Revise before sending. Answer each question against your draft:
+  1. Which sentences explain how something works? For each, what do the official docs or a
+     textbook call that idea? If it has a name, lead with it: "It's <term>: <one-line why>".
+  2. Which sentences only restate a benefit? Cut them.
+  3. Did you cover how to create or run it, where it's stored, and how it differs from similar tools?"""
+
+
+def stock_hits(raw):
+    hits = []
+    for n, line in enumerate(raw.splitlines(), 1):
+        for pat, msg in STOCK_PHRASES:
+            for mt in re.finditer(pat, line, re.I):
+                hits.append(f"  line {n}: {msg}  [{mt.group(0)}]")
+    return hits
+
+
+def quick(path, raw):
+    hits = stock_hits(raw)
+    print(f"== {path}: {len(hits)} stock phrase(s)")
+    print("\n".join(hits) if hits else "  none")
+    print(QUESTIONS)
+
+
 def report(path, m):
     print(f"\n== {path}  ({m['words']} words, {m['sentences']} sentences, longest {m['longest_sentence']})")
     passed = 0
@@ -126,9 +159,17 @@ def report(path, m):
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         sys.exit(__doc__)
+    if sys.argv[1] == "--quick":
+        for p in sys.argv[2:] or ["-"]:
+            raw = sys.stdin.read() if p == "-" else open(p, encoding="utf-8", errors="replace").read()
+            quick(p, raw)
+        sys.exit(0)
     for p in sys.argv[1:]:
         with open(p, encoding="utf-8", errors="replace") as f:
-            m = analyze(f.read())
+            raw = f.read()
+        m = analyze(raw)
+        for h in stock_hits(raw):
+            print(h)
         if m is None:
             print(f"{p}: no prose found")
         else:
