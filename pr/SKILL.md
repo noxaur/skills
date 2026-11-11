@@ -43,7 +43,7 @@ For visual changes include before and after screenshots, if its motion include v
 
 ## Merge Danger
 
-Describe whether it's a one-way or two-way door.
+Describe whether it's a one-way or two-way door 2 and blast danger.
 Consider all possibilities. Examples are layout shift, breakages for consumers, mobile responsiveness, etc.
 
 ## gh attach media
