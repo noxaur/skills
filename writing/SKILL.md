@@ -1,6 +1,6 @@
 ---
 name: writing
-description: Use when writing user facing text including whomever prompted you.
+description: Use when writing to the human prompting you, or prose people will read on a site, doc or post.
 ---
 
 ## Style
@@ -57,6 +57,11 @@ Better: "For logos, start with Logo Archive. You can filter by designer and styl
 **Proving you followed the rules.** Describe the result.
 Bad: "It has no eyebrow labels, no icon tiles, no card grid and no gradients."
 Better: "It's a plain list of rows on near-black, with one amber accent."
+
+**Excusing what you left out.** Report what you did. Mention a skipped step only when the user has to act on it, and then say what to do.
+Bad: "Because the brief said to change nothing, I didn't fix the null check."
+Better: "`parse.ts:42` crashes on empty input."
+Better, when it matters: "I couldn't run the integration tests here, so run `npm run test:e2e` before merging."
 
 **Packing too much into one sentence.**
 Bad: "14 of 14 components render, with four weak spots remaining: illegible engraved type, noisy dithered bezels/ASCII scope border, an unconvincing still-life image, and gappy gallery layout."
