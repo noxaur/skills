@@ -7,6 +7,8 @@ description: Use when user indicates that you should create a pr; ship, mr/merge
 
 Merge target branch into your branch. Resolve merge conflicts yourself. Keep intent of both sides and run the project checks.
 
+One concern per PR. Split unrelated changes into separate PRs, and stack a PR on the branch it depends on.
+
 ## Template
 
 Branch: short name at most three words, separated by hyphens.
@@ -48,10 +50,10 @@ Consider all possibilities. Examples are layout shift, breakages for consumers, 
 
 ## gh attach media
 
-Upload images and videos with `gh` `--attach`. Do not commit them. Put the local paths in the table and pass those same paths to `--attach`, so `gh` rewrites them in place.
+Upload images and videos with `gh` `--attach`. Do not commit them. Put the local paths in the table and pass those same paths to `--attach`, so `gh` rewrites them in place. Keep the body and media outside the worktree.
 
 ```shell
-gh pr create --body-file pr.md --attach ./before.png --attach ./after.png
+gh pr create --body-file "$TMPDIR/pr.md" --attach "$TMPDIR/before.png" --attach "$TMPDIR/after.png"
 ```
 
 `gh pr edit` without `--body` appends the file. Pass the full body when the image belongs in the table.
