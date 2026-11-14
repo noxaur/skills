@@ -13,9 +13,17 @@ You own the part of the codebase you maintain. Its health is your responsibility
 
 A bad change is a symptom. Ask what made it the likely output, usually a misleading doc, a bad example to copy, or a missing check. Fix that cause everywhere, then fix the instance. If an agent wrote it, ask that agent why.
 
-## Stakes over instructions
+## Fix at the widest layer
 
-Guidance gets skimmed. A fast, deterministic check that fails with a fix-it message steers every future change, and what you measure tells agents what you care about. Speed is part of the garden too: slow feedback loops stall agents far worse than people.
+An inverted triangle ranks where a fix can live, widest first:
+
+1. **Codebase**: API design, architecture, refactoring. Make the wrong thing impossible to write.
+2. **Static analysis**: lints, types, compilers, tests, CI. Make it fail fast with a fix-it message.
+3. **Verification**: formal or empirical. Prove or observe that it holds.
+4. **Prose**: rules, skills, AGENTS.md. Tell agents and hope they read it.
+5. **Human review**: catch it by eye, one change at a time.
+
+Width is how much each layer should carry. Upper layers steer every future change without being read. Lower layers get skimmed, forgotten, and don't scale. Drop a layer only when the one above can't express the fix. What you measure tells agents what you care about, and slow feedback loops stall agents far worse than people, so keep checks fast.
 
 ## Weed continuously
 
