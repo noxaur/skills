@@ -9,6 +9,8 @@ Merge target branch into your branch. Resolve merge conflicts yourself. Keep int
 
 One concern per PR. Split unrelated changes into separate PRs, and stack a PR on the branch it depends on.
 
+A non-draft PR claims it is ready to merge. If the work is not ready, open it with `gh pr create --draft`, and run `gh pr ready` once it is.
+
 ## Template
 
 Branch: short name at most three words, separated by hyphens.
@@ -60,4 +62,4 @@ gh pr create --body-file "$TMPDIR/pr.md" --attach "$TMPDIR/before.png" --attach 
 
 ## Until merged
 
-Watch the pull request until it is merged. Resolve conflicts, fix failing checks and address review comments. Verify each reported bug or review issue before you fix it. Fix only a bug that you verified and that does not change the pr scope.
+Watch the pull request until it is merged. Keep it up to date: whenever the target branch (usually main) moves, merge it into your branch and run the checks again. Resolve conflicts, fix failing checks and address review comments. Verify each reported bug or review issue before you fix it. Fix only a bug that you verified and that does not change the pr scope.
