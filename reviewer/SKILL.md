@@ -3,7 +3,7 @@ name: reviewer
 description: Use before opening a PR for any change, including config, docs and skills.
 ---
 
-Use the model specificied by the user as a reviewer model in a loop, default to codex sol 6.1 high.
+Use the model specificied by the user as a reviewer model in a loop, default to codex sol 6.2 high.
 Ask sol to relentlessly review your implementation and take in the feedback.
 Be critical to the feedback sol gives, it should be verified before attempting a fix.
 The loop can not be longer then 3 times.
@@ -16,7 +16,7 @@ Start the reviewer with T3 `delegate_task`. Each model below has a brief written
 
 | Model | Target | Brief |
 | --- | --- | --- |
-| GPT-6.1 Sol (Codex) | `gpt-6.1-sol`, effort high | [`briefs/gpt-6.1-sol.md`](briefs/gpt-6.1-sol.md) |
+| GPT-6.2 Sol (Codex) | `gpt-6.2-sol`, effort high | [`briefs/gpt-6.2-sol.md`](briefs/gpt-6.2-sol.md) |
 | Grok 4.7 (Cursor) | `grok-4.7`, effort high | [`briefs/grok-4.7.md`](briefs/grok-4.7.md) |
 
 The brief carries the review rules. The task itself only adds:
