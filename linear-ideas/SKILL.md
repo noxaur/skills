@@ -7,7 +7,7 @@ Each idea is an outcome the user has in mind. File it so they can pick it up mon
 
 ## Where it goes
 
-Use the Linear MCP server, in the nox-orb workspace. File in the team and project named after the current repo, such as **CatWM**, and ask when no team matches. Set state **Backlog** and label **Idea**, and leave priority unset. If the team has no Idea label, create it. Ideas skip Triage, which is for incoming GitHub issues.
+Use the Linear MCP server. File in the team and project the work belongs to, and ask the user when that is unclear. Set state **Backlog** and label **Idea**, and leave priority unset. If the team has no Idea label, create it. Ideas skip Triage.
 
 ## One ticket per outcome
 
