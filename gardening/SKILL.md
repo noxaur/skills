@@ -1,6 +1,6 @@
 ---
 name: gardening
-description: Use for any codebase maintenance task.
+description: Use when correcting or preventing agent mistakes, refactoring, cleaning up code or docs, or adding lints, rules or memories.
 ---
 
 ## The codebase is a garden
