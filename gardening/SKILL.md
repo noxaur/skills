@@ -23,7 +23,11 @@ An inverted triangle ranks where a fix can live, widest first:
 4. **Prose**: rules, skills, AGENTS.md. Tell agents and hope they read it.
 5. **Human review**: catch it by eye, one change at a time.
 
-Width is how much each layer should carry. Upper layers steer every future change without being read. Lower layers get skimmed, forgotten, and don't scale. Drop a layer only when the one above can't express the fix. What you measure tells agents what you care about, and slow feedback loops stall agents far worse than people, so keep checks fast.
+Layers 1–3 enforce; 4–5 only ask. Put each fix in the widest layer that can hold it, and only there: a check with a fix-it message needs no prose about it.
+
+Start at layer 1 and think big. A lint guards a trap that a better design would remove. Refactors are cheap; if one is too big to make unasked, propose it.
+
+What you measure tells agents what you care about. Keep checks fast: slow feedback stalls agents.
 
 ## Weed continuously
 
