@@ -3,9 +3,9 @@ name: pr
 description: Use when user indicates that you should create a pr; ship, mr/merge request etc
 ---
 
-## Pre
+## Before you open
 
-Merge target branch into your branch. Resolve merge conflicts yourself. Keep intent of both sides and run the project checks.
+Merge the target branch into yours. Resolve conflicts yourself, keep the intent of both sides and run the project checks.
 
 One concern per PR. Split unrelated changes into separate PRs, and stack a PR on the branch it depends on.
 
@@ -13,24 +13,54 @@ A non-draft PR claims it is ready to merge. If the work is not ready, open it wi
 
 ## Template
 
-Branch: short name at most three words, separated by hyphens.
-Title: project standards, else conventional plain english: `type(optional scope): description`.
+Branch: a short name of at most three hyphenated words.
+Title: the project's convention, else `type(optional scope): description` in plain English.
 
-```text
-Explain the problem in a sentence or two. Then.
+Fill every `<placeholder>`. Keep every heading, in this order.
 
-<summary>
-
-<evidence> (before/after grid)
-
-<merge danger>
-
-`...{model name} for {role > 1 ? roles : role}.
-```
+```markdown
+<opening>
 
 ## Summary
 
-Choose the smallest view that keeps the pr clear.
+<the smallest view of the change>
+
+## Evidence
+
+<proof that it works>
+
+## Merge danger
+
+<One-way or Two-way> door, <blast radius>.
+
+- <danger>
+
+## Models
+
+- <model>: <role>
+```
+
+## Sections
+
+### Opening
+
+No heading. One or two sentences a reader understands without the diff.
+
+- Bug: what breaks, for whom and when, then the fix.
+
+```markdown
+CI failed pull requests on wall-clock timing from shared runners: in the last 60 runs every red job came from a time limit, none from a bug. Timing now only warns, and a timeout stops only a hang.
+```
+
+- Feature: what the user can now do, and what it looks like.
+
+```markdown
+Profile Management now counts down the 30-second profile switch cooldown beside its title, then shows **Ready** in green for 5 seconds.
+```
+
+### Summary
+
+Choose the smallest view that keeps the change clear.
 
 - Show logic or an algorithm as pseudocode.
 - Show runtime control flow as a call tree.
@@ -39,26 +69,45 @@ Choose the smallest view that keeps the pr clear.
 - Show component interaction, control flow, or data flow with Mermaid.
 - Use diff when the point is what changes and the surrounding shape already exists. Match the diff shape to the topic.
 
-## Evidence
+### Evidence
 
-Concrete evidence that this change works.
+Concrete proof that the change works: what ran, what it covers, and the capture or log behind it.
 
-For visual changes include before and after screenshots, if its motion include video.
+For a visual change, show before and after side by side. For motion, add a video.
 
-## Merge Danger
+```markdown
+|       | Before                       | After                       |
+| ----- | ---------------------------- | --------------------------- |
+| Light | ![before](/tmp/before.png)   | ![after](/tmp/after.png)    |
+```
 
-Describe whether it's a one-way or two-way door 2 and blast danger.
-Consider all possibilities. Examples are layout shift, breakages for consumers, mobile responsiveness, etc.
-
-## gh attach media
-
-Upload images and videos with `gh` `--attach`. Do not commit them. Put the local paths in the table and pass those same paths to `--attach`, so `gh` rewrites them in place. Keep the body and media outside the worktree.
+Upload images and videos with `gh` `--attach`, never commit them. Put the local paths in the table and pass the same paths to `--attach`, so `gh` rewrites them in place. Keep the body and media outside the worktree.
 
 ```shell
 gh pr create --body-file "$TMPDIR/pr.md" --attach "$TMPDIR/before.png" --attach "$TMPDIR/after.png"
 ```
 
 `gh pr edit` without `--body` appends the file. Pass the full body when the image belongs in the table.
+
+### Merge danger
+
+Open with the door and the blast radius, then one bullet per danger. Consider every consumer: layout shift, breakage for consumers, mobile responsiveness, saved data, settings.
+
+```markdown
+Two-way door, small blast radius.
+
+- The Wardrobe timer only moved, with the same pixels (see Evidence).
+- `Theme` is an internal enum with no outside consumers.
+```
+
+### Models
+
+Every model that worked on the change, one per line, with its role.
+
+```markdown
+- Claude Opus 5.5: implementation
+- GPT-6.2 Sol: review
+```
 
 ## Until merged
 
