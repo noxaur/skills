@@ -6,8 +6,8 @@ The section is the only committed alignment surface. A reviewer who never saw th
 
 ## Host requirement
 
-- Read merged PR history with `gh`. If PRs are not accessible, read `git log` on the default branch.
-- If no real history is readable, **stop** and say so. A vision built on invented evidence is worse than none.
+- Read merged PR history with `gh`. If PRs are not accessible, read `git log` on the default branch. With no history yet, read the repo's files and ask the user what the project refuses to become.
+- If none of these gives evidence, **stop** and say so. A vision built on invented evidence is worse than none.
 - The review loop runs on lavish-axi through `npx -y lavish-axi`. Launch it; report a blocker only if the launch fails.
 
 ## Hard rules
@@ -48,7 +48,7 @@ Per hypothetical: id, title, the proposal (2-4 sentences), the value it tests (q
 
 ### 4. Review loop
 
-- Copy both assets into the tool's scratch area, never the target repo. Fill only the marked slots: project name, run note, the full draft markdown and the CARDS array.
+- Copy both assets into the tool's scratch area, never the target repo. Fill only the marked slots: project name, run note, the full draft as one JSON string and the CARDS array.
 - Launch `npx -y lavish-axi <board.html>`, report the URL, then wait on `npx -y lavish-axi poll <board.html>`. Verdicts arrive queued.
 - Per batch: fold the user's reasoning into the draft, without copying the hypothetical, card id or transcript. Update the board in place with the new draft and remaining cards. Reply through `poll --agent-reply` with one changelog line per verdict ("H-3 off mission -> Fast now names the winner over Simple").
 - Continue until the user approves or ends the session. Silence is not approval.

@@ -8,7 +8,8 @@
   2. Fill ONLY the slots marked {{...}} below:
        {{PROJECT}}        - the target repo name (appears in <title> and the header meta)
        {{RUN_NOTE}}       - one short italic note for the header (round, date, or blank)
-       {{DRAFT_MARKDOWN}} - the full latest draft: # <Project>, the identity line,
+       {{DRAFT_JSON}}     - the full latest draft as one JSON string (JSON.stringify):
+                            # <Project>, the identity line,
                             ## What makes <Project> special, and its bullets
        CARDS              - one object per hypothetical: { id, title, body, tests, why }
   3. Change NOTHING else: no restyling, no layout edits, no extra sections.
@@ -51,7 +52,7 @@
 </main>
 
 <script>
-const DRAFT = `{{DRAFT_MARKDOWN}}`;
+const DRAFT = {{DRAFT_JSON}};
 
 const CARDS = [
   // {{CARDS}} - one object per hypothetical, in presentation order:
@@ -85,10 +86,10 @@ let topIdx = 0; const ledger = [];
 stack.innerHTML = CARDS.map((c,i) => `
   <div class="vr-card" id="vrc-${i}">
     <span class="vr-card-id">${c.id} · ${i+1}/${CARDS.length}</span>
-    <h3 class="vr-card-title">${c.title}</h3>
-    <p class="vr-card-body">${c.body}</p>
-    <div class="vr-card-tests">${c.tests}</div>
-    <div class="vr-why"><span class="vr-why-label">Why the answer is not obvious</span><p>${c.why}</p></div>
+    <h3 class="vr-card-title">${inline(c.title)}</h3>
+    <p class="vr-card-body">${inline(c.body)}</p>
+    <div class="vr-card-tests">${inline(c.tests)}</div>
+    <div class="vr-why"><span class="vr-why-label">Why the answer is not obvious</span><p>${inline(c.why)}</p></div>
     <div class="vr-verdicts">${VERDICTS.map(v => `<button type="button" aria-pressed="false" onclick="pick(${i}, this)">${v}</button>`).join('')}</div>
     <textarea class="vr-reason" placeholder="reasoning (this is what the vision gets rebuilt from)"></textarea>
     <button type="button" class="vr-commit" disabled onclick="commit(${i})">Record verdict</button>
@@ -112,6 +113,7 @@ function pick(i, btn){
   card.querySelector('.vr-commit').disabled = false;
 }
 function commit(i){
+  if (i !== topIdx) return;
   const card = document.getElementById('vrc-'+i);
   const verdict = card.querySelector('.vr-verdicts button[aria-pressed="true"]')?.textContent;
   if(!verdict) return;
