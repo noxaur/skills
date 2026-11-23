@@ -6,8 +6,8 @@ description: Use before opening a PR for any change, including config, docs and 
 Use the model specificied by the user as a reviewer model in a loop, default to codex sol 6.2 high.
 Ask sol to relentlessly review your implementation and take in the feedback.
 Be critical to the feedback sol gives, it should be verified before attempting a fix.
-The loop can not be longer then 3 times.
-Do not address nitpicks and stop if you only get nitpicks.
+Run at most two rounds. Start round 2 only if round 1 found a bug that you verified and fixed. Nitpicks, style fixes and rejected findings don't count: if round 1 found only those, stop.
+Do not address nitpicks.
 Don't scope creep.
 
 ## Briefing the reviewer
@@ -23,6 +23,6 @@ The brief carries the review rules. The task itself only adds:
 
 - the base branch or commit range to diff against
 - one line on what the change is meant to do
-- on rounds 2 and 3, the findings you fixed and the ones you rejected, with your reason
+- on round 2, the findings you fixed and the ones you rejected, with your reason
 
 For a model with no brief, send the Sol brief.
