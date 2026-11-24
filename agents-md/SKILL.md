@@ -5,7 +5,7 @@ description: Use when a repo has no AGENTS.md or CLAUDE.md, or only a bare one.
 
 Start from [reference/AGENTS.md](reference/AGENTS.md). Keep its general lines and fill every `<placeholder>` from the repo.
 
-Write the vision first with [reference/vision/vision.md](reference/vision/vision.md). It decides what the rest of the file defends.
+Write the vision first with [reference/vision/vision.md](reference/vision/vision.md). It decides what the rest of the file defends. While the board waits on the user, draft the other sections.
 
 ## Sections
 

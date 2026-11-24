@@ -1,22 +1,5 @@
 <!doctype html>
-<!--
-  Vision review board TEMPLATE.
-
-  Agent instructions:
-  1. Copy this file and review.css next to each other in the tool's scratch
-     area, never into the target repo.
-  2. Fill ONLY the slots marked {{...}} below:
-       {{PROJECT}}        - the target repo name (appears in <title> and the header meta)
-       {{RUN_NOTE}}       - one short italic note for the header (round, date, or blank)
-       {{DRAFT_JSON}}     - the full latest draft as one JSON string (JSON.stringify):
-                            # <Project>, the identity line,
-                            ## What makes <Project> special, and its bullets
-       CARDS              - one object per hypothetical: { id, title, body, tests, why }
-     In both, write every < as <, so a quoted </script> can't end the script.
-  3. Change NOTHING else: no restyling, no layout edits, no extra sections.
-     The stylesheet and structure are the vision house style.
-  4. Open with: npx -y lavish-axi <this-file>   then poll for verdicts.
--->
+<!-- Vision review board. Built by ../build-board.mjs; never edit or restyle by hand. -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -55,10 +38,7 @@
 <script>
 const DRAFT = {{DRAFT_JSON}};
 
-const CARDS = [
-  // {{CARDS}} - one object per hypothetical, in presentation order:
-  // { id:'H-1', title:'...', body:'the concrete proposal', tests:'tests: "the principle, quoted from the draft"', why:'both sides, steelmanned' },
-];
+const CARDS = {{CARDS}};
 
 const VERDICTS = ['In vision','Off mission','Conditional'];
 
