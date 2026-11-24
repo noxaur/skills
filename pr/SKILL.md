@@ -37,7 +37,7 @@ Fill every `<placeholder>`. Keep every heading, in this order.
 
 ## Models
 
-- <model>: <role>
+- <model> as <role>
 ```
 
 ## Sections
@@ -102,11 +102,11 @@ Two-way door, small blast radius.
 
 ### Models
 
-Every model that worked on the change, one per line, with its role.
+One line per model that worked on the change: its short name and role, nothing more.
 
 ```markdown
-- Claude Opus 5.5: implementation
-- GPT-6.2 Sol: review
+- opus 5.5 as implementer
+- sol-6.2 as reviewer
 ```
 
 ## Until merged
