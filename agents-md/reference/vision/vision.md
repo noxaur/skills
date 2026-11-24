@@ -16,9 +16,9 @@ The section is the only committed alignment surface. A reviewer who never saw th
 2. **The user owns the vision.** Draft, stress-test, fold in their verdicts. Never approve, never soften a hypothetical, never add a value they did not state or show.
 3. **An acceptance policy.** Each value is a testable commitment that refuses a trade. When two values collide, name the winner.
 4. **No softball hypotheticals.** Each sits on a fault line where yes and no are both defensible, both sides steelmanned. If you can predict the answer, replace it.
-5. **The board ships as-is.** Use `assets/review-template.html` and `assets/review.css`: black ink on white paper set like literature, the full draft always visible on the left, one hypothetical at a time in a card stack on the right, the steelman in full view, one queued verdict per card. Fill the slots; never restyle, restructure or substitute another surface.
+5. **The board ships as-is.** Build it with `build-board.mjs`: black ink on white paper set like literature, the full draft always visible on the left, one hypothetical at a time in a card stack on the right, the steelman in full view, one queued verdict per card. Never restyle, restructure or substitute another surface.
 6. **Trace every edit.** Each verdict maps to a named edit in a changelog, so the user sees how their answer changed the text.
-7. **Light.** Two to four values, one or two sentences each; the section fits on one screen. No roadmap, feature list or marketing voice. Plain hyphens, never em dashes.
+7. **Light.** Two to four values, one line each; the section fits on one screen. A value names a refusal, not how the product behaves: where a window shows or how settings open belongs in How it works, if anywhere. No roadmap, feature list or marketing voice. Plain hyphens, never em dashes.
 8. **Nothing else.** Never commit hypotheticals, board transcripts or an answers file. Every byte of AGENTS.md outside the section stays unchanged.
 
 ## Pipeline
@@ -48,14 +48,16 @@ Per hypothetical: id, title, the proposal (2-4 sentences), the value it tests (q
 
 ### 4. Review loop
 
-- Copy both assets into the tool's scratch area, never the target repo. Fill only the marked slots: project name, run note, the full draft as one JSON string and the CARDS array.
+- Write the round as `round.json` (`project`, `runNote`, `draft`, `cards`) in a scratch directory that survives a restart (not `/tmp`), never the target repo. Run `node build-board.mjs round.json <dir>` (the script sits next to this file); it fills the template, escapes the text and fails on a broken slot.
 - Launch `npx -y lavish-axi <board.html>`, report the URL, then wait on `npx -y lavish-axi poll <board.html>`. Verdicts arrive queued.
-- Per batch: fold the user's reasoning into the draft, without copying the hypothetical, card id or transcript. Update the board in place with the new draft and remaining cards. Reply through `poll --agent-reply` with one changelog line per verdict ("H-3 off mission -> Fast now names the winner over Simple").
+- Per batch: read each verdict's notes, not just its label. Fold the reasoning in by sharpening the value it tests, never by appending detail; if the value only grows, rewrite it shorter. Keep the hypothetical, card id and transcript out of the draft.
+- When a note contradicts its label or opens a new question, ask it back as a new card instead of guessing.
+- Rebuild the board into the same directory with the new draft and remaining cards, so the session URL stays. Reply through `poll --agent-reply` with one changelog line per verdict ("H-3 off mission -> Fast now names the winner over Simple").
 - Continue until the user approves or ends the session. Silence is not approval.
 
 ### 5. Write
 
-Write the approved text at the top of AGENTS.md.
+Write the approved text at the top of AGENTS.md. If the vision now runs ahead of the code, leave How it works describing the code and tell the user where the two differ.
 
 ## Output template
 
@@ -77,4 +79,4 @@ We can't compromise on these.
 - [ ] 5-8 hypotheticals, none predictable, both sides steelmanned
 - [ ] Every verdict is reflected in the draft, with a changelog line
 - [ ] The section alone settles an accept/resist call
-- [ ] Two to four values, one screen
+- [ ] Two to four values, one line each, one screen
